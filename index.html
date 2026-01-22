@@ -58,7 +58,7 @@ header p {
     display: flex;
     gap: 10px;
     overflow-x: auto;
-    justify-content: flex-start; /* ✅ FIX */
+    justify-content: flex-start; /* FIX */
     -webkit-overflow-scrolling: touch;
 }
 
@@ -142,6 +142,39 @@ header p {
     text-decoration: none;
 }
 
+/* FLOATING TELEGRAM BUTTON */
+.telegram-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+}
+
+.telegram-float a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    border-radius: 30px;
+    background: linear-gradient(to right, #FFD6E8, #F4B6C2);
+    color: #6B4E71;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 8px 20px rgba(244,182,194,0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.telegram-float a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(244,182,194,0.55);
+}
+
+.telegram-icon {
+    width: 18px;
+    height: 18px;
+}
+
 /* FOOTER */
 footer {
     text-align: center;
@@ -175,7 +208,6 @@ footer {
 <section class="subliminals">
 <div class="grid">
 
-<!-- HOME -->
 <div class="card home-card" data-category="home">
     <h3>Free Subliminals</h3>
     <p class="subtext">Click below to access free subliminals</p>
@@ -184,29 +216,7 @@ footer {
     </a>
 </div>
 
-<!-- LOVE -->
 <div class="card" data-category="love">
-    <h3>yoursubliminalname</h3>
-    <ul>
-        <li>Benefit one</li>
-        <li>Benefit two</li>
-    </ul>
-    <div class="price">Price</div>
-    <a href="https://t.me/YourTelegramUsername" class="buy-btn">Buy on Telegram</a>
-</div>
-
-<div class="card" data-category="love">
-    <h3>yoursubliminalname</h3>
-    <ul>
-        <li>Benefit one</li>
-        <li>Benefit two</li>
-    </ul>
-    <div class="price">Price</div>
-    <a href="https://t.me/YourTelegramUsername" class="buy-btn">Buy on Telegram</a>
-</div>
-
-<!-- MONEY -->
-<div class="card" data-category="money">
     <h3>yoursubliminalname</h3>
     <ul>
         <li>Benefit one</li>
@@ -224,38 +234,6 @@ footer {
     </ul>
     <div class="price">Price</div>
     <a href="https://t.me/YourTelegramUsername" class="buy-btn">Buy on Telegram</a>
-</div>
-
-<!-- PREMIUM -->
-<div class="card" data-category="premium">
-    <h3>yoursubliminalname</h3>
-    <p class="subtext">What will be included in Premium?</p>
-    <ul>
-        <li>Exclusive audios</li>
-        <li>Faster results</li>
-    </ul>
-    <div class="price">Price</div>
-    <a href="https://t.me/YourTelegramUsername" class="buy-btn">Buy on Telegram</a>
-</div>
-
-<!-- CHARMS -->
-<div class="card" data-category="charms">
-    <h3>yourcharmsname</h3>
-    <ul>
-        <li>Charm benefit</li>
-    </ul>
-    <div class="price">Price</div>
-    <a href="https://t.me/YourTelegramUsername" class="buy-btn">Buy on Telegram</a>
-</div>
-
-<!-- CUSTOM -->
-<div class="card" data-category="custom">
-    <h3>customizeditemname</h3>
-    <ul>
-        <li>Personalized for you</li>
-    </ul>
-    <div class="price">Price</div>
-    <a href="https://t.me/YourTelegramUsername" class="buy-btn">Order on Telegram</a>
 </div>
 
 </div>
@@ -265,17 +243,23 @@ footer {
     © 2026 Angelic Subliminals
 </footer>
 
+<!-- FLOATING TELEGRAM -->
+<div class="telegram-float">
+    <a href="https://t.me/YourTelegramUsername" target="_blank">
+        <svg class="telegram-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M9.04 15.47l-.38 5.34c.54 0 .78-.23 1.07-.5l2.57-2.45 5.33 3.89c.98.54 1.67.26 1.91-.91l3.47-16.3c.29-1.36-.49-1.89-1.44-1.54L1.87 9.4c-1.32.51-1.3 1.23-.24 1.56l4.99 1.56L18.2 5.77c.54-.36 1.03-.16.63.2z"/>
+        </svg>
+        Any questions?
+    </a>
+</div>
+
 <script>
 const searchInput = document.getElementById("searchInput");
 const cards = document.querySelectorAll(".card");
 const buttons = document.querySelectorAll(".categories button");
 
-/* LOAD HOME BY DEFAULT */
-window.onload = () => {
-    filterCategory('home');
-};
+window.onload = () => filterCategory("home");
 
-/* SEARCH */
 searchInput.addEventListener("input", () => {
     const value = searchInput.value.toLowerCase();
     cards.forEach(card => {
@@ -284,7 +268,6 @@ searchInput.addEventListener("input", () => {
     });
 });
 
-/* CATEGORY FILTER */
 function filterCategory(category, button) {
     buttons.forEach(btn => btn.classList.remove("active"));
     if (button) button.classList.add("active");
