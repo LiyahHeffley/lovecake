@@ -162,7 +162,7 @@ footer {
     <input type="text" id="searchInput" placeholder="Search subliminals...">
 
     <div class="categories">
-        <button class="active" onclick="filterCategory('home')">Home</button>
+        <button onclick="filterCategory('home')" class="active">Home</button>
         <button onclick="filterCategory('love')">Love</button>
         <button onclick="filterCategory('money')">Money</button>
         <button onclick="filterCategory('premium')">Love Cake Premium</button>
@@ -174,8 +174,8 @@ footer {
 <section class="subliminals">
 <div class="grid">
 
-<!-- HOME -->
-<div class="card" data-category="home">
+<!-- HOME (ONLY THIS CARD) -->
+<div class="card home-card" data-category="home">
     <h3>Free Subliminals</h3>
     <p class="subtext">Click below to access free subliminals</p>
     <a href="https://t.me/YourTelegramUsername" class="buy-btn">
@@ -186,14 +186,20 @@ footer {
 <!-- LOVE (2) -->
 <div class="card" data-category="love">
     <h3>yoursubliminalname</h3>
-    <ul><li>Benefit one</li><li>Benefit two</li></ul>
+    <ul>
+        <li>Benefit one</li>
+        <li>Benefit two</li>
+    </ul>
     <div class="price">Price</div>
     <a href="https://t.me/YourTelegramUsername" class="buy-btn">Buy on Telegram</a>
 </div>
 
 <div class="card" data-category="love">
     <h3>yoursubliminalname</h3>
-    <ul><li>Benefit one</li><li>Benefit two</li></ul>
+    <ul>
+        <li>Benefit one</li>
+        <li>Benefit two</li>
+    </ul>
     <div class="price">Price</div>
     <a href="https://t.me/YourTelegramUsername" class="buy-btn">Buy on Telegram</a>
 </div>
@@ -201,14 +207,20 @@ footer {
 <!-- MONEY (2) -->
 <div class="card" data-category="money">
     <h3>yoursubliminalname</h3>
-    <ul><li>Benefit one</li><li>Benefit two</li></ul>
+    <ul>
+        <li>Benefit one</li>
+        <li>Benefit two</li>
+    </ul>
     <div class="price">Price</div>
     <a href="https://t.me/YourTelegramUsername" class="buy-btn">Buy on Telegram</a>
 </div>
 
 <div class="card" data-category="money">
     <h3>yoursubliminalname</h3>
-    <ul><li>Benefit one</li><li>Benefit two</li></ul>
+    <ul>
+        <li>Benefit one</li>
+        <li>Benefit two</li>
+    </ul>
     <div class="price">Price</div>
     <a href="https://t.me/YourTelegramUsername" class="buy-btn">Buy on Telegram</a>
 </div>
@@ -217,16 +229,20 @@ footer {
 <div class="card" data-category="premium">
     <h3>yoursubliminalname</h3>
     <p class="subtext">What will be included in Premium?</p>
-    <ul><li>Exclusive audios</li><li>Faster results</li></ul>
+    <ul>
+        <li>Exclusive audios</li>
+        <li>Faster results</li>
+    </ul>
     <div class="price">Price</div>
     <a href="https://t.me/YourTelegramUsername" class="buy-btn">Buy on Telegram</a>
 </div>
 
-<!-- CHARMS (7) -->
-<!-- Copy-paste this card 7 times -->
+<!-- CHARMS (7 – duplicate this card) -->
 <div class="card" data-category="charms">
     <h3>yourcharmsname</h3>
-    <ul><li>Charm benefit</li></ul>
+    <ul>
+        <li>Charm benefit</li>
+    </ul>
     <div class="price">Price</div>
     <a href="https://t.me/YourTelegramUsername" class="buy-btn">Buy on Telegram</a>
 </div>
@@ -234,14 +250,18 @@ footer {
 <!-- CUSTOMIZED ITEMS (2) -->
 <div class="card" data-category="custom">
     <h3>customizeditemname</h3>
-    <ul><li>Personalized for you</li></ul>
+    <ul>
+        <li>Personalized for you</li>
+    </ul>
     <div class="price">Price</div>
     <a href="https://t.me/YourTelegramUsername" class="buy-btn">Order on Telegram</a>
 </div>
 
 <div class="card" data-category="custom">
     <h3>customizeditemname</h3>
-    <ul><li>Personalized for you</li></ul>
+    <ul>
+        <li>Personalized for you</li>
+    </ul>
     <div class="price">Price</div>
     <a href="https://t.me/YourTelegramUsername" class="buy-btn">Order on Telegram</a>
 </div>
@@ -258,6 +278,12 @@ const searchInput = document.getElementById("searchInput");
 const cards = document.querySelectorAll(".card");
 const buttons = document.querySelectorAll(".categories button");
 
+/* LOAD HOME BY DEFAULT */
+window.onload = () => {
+    filterCategory('home');
+};
+
+/* SEARCH */
 searchInput.addEventListener("input", () => {
     const value = searchInput.value.toLowerCase();
     cards.forEach(card => {
@@ -266,14 +292,20 @@ searchInput.addEventListener("input", () => {
     });
 });
 
+/* CATEGORY FILTER */
 function filterCategory(category) {
     buttons.forEach(btn => btn.classList.remove("active"));
-    event.target.classList.add("active");
+    event.target?.classList.add("active");
 
     cards.forEach(card => {
-        card.style.display =
-            card.dataset.category === category
-            ? "block" : "none";
+        if (category === "home") {
+            card.style.display = card.classList.contains("home-card")
+                ? "block" : "none";
+        } else {
+            card.style.display =
+                card.dataset.category === category
+                ? "block" : "none";
+        }
     });
 }
 </script>
