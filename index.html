@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Angelic Subliminals</title>
 
 <style>
@@ -20,61 +21,67 @@ body {
 /* HEADER */
 header {
     text-align: center;
-    padding: 60px 20px 30px;
+    padding: 50px 20px 30px;
 }
 
 header h1 {
-    font-size: 40px;
+    font-size: clamp(28px, 5vw, 42px);
     color: #F4B6C2;
 }
 
 header p {
     margin-top: 10px;
+    font-size: 14px;
     color: #9A7AA0;
 }
 
 /* CONTROLS */
 .controls {
     max-width: 1100px;
-    margin: 0 auto 40px;
-    padding: 0 20px;
+    margin: auto;
+    padding: 0 20px 30px;
     text-align: center;
 }
 
 #searchInput {
     width: 100%;
-    max-width: 400px;
-    padding: 12px 18px;
+    max-width: 420px;
+    padding: 14px 20px;
     border-radius: 30px;
     border: 1px solid #FFD6E8;
     outline: none;
-    margin-bottom: 20px;
+    font-size: 14px;
 }
 
-/* CATEGORY BUTTONS */
+/* CATEGORIES */
 .categories {
+    margin-top: 18px;
     display: flex;
-    flex-wrap: wrap;
     gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 5px;
     justify-content: center;
 }
 
 .categories button {
-    padding: 8px 18px;
+    flex: 0 0 auto;
+    padding: 10px 18px;
     border-radius: 20px;
     border: none;
     background: #FFD6E8;
     color: #6B4E71;
+    font-size: 13px;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .categories button.active {
     background: #F4B6C2;
 }
 
-/* GRID */
+/* SUBLIMINAL GRID */
 .subliminals {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: auto;
     padding: 0 20px 80px;
 }
@@ -82,31 +89,38 @@ header p {
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 30px;
+    gap: 25px;
 }
 
 /* CARD */
 .card {
     background: #fff;
-    border-radius: 20px;
-    padding: 25px;
+    border-radius: 22px;
+    padding: 24px;
     box-shadow: 0 10px 25px rgba(244,182,194,0.35);
+    transition: transform 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
 }
 
 .card h3 {
     color: #F4B6C2;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
+    font-size: 18px;
 }
 
 .card ul {
     list-style: none;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .card ul li {
     position: relative;
     padding-left: 18px;
     margin-bottom: 6px;
+    font-size: 14px;
 }
 
 .card ul li::before {
@@ -117,26 +131,44 @@ header p {
 }
 
 .price {
-    font-weight: bold;
-    margin-bottom: 15px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    font-size: 14px;
 }
 
+/* BUTTON */
 .buy-btn {
     display: block;
     text-align: center;
-    padding: 12px;
+    padding: 13px;
     border-radius: 30px;
     background: linear-gradient(to right, #FFD6E8, #F4B6C2);
     color: #6B4E71;
     text-decoration: none;
+    font-size: 14px;
 }
 
 /* FOOTER */
 footer {
     text-align: center;
-    padding: 30px;
-    font-size: 13px;
+    padding: 30px 20px;
+    font-size: 12px;
     color: #9A7AA0;
+}
+
+/* MOBILE TWEAKS */
+@media (max-width: 480px) {
+    header {
+        padding-top: 40px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .categories {
+        justify-content: flex-start;
+    }
 }
 </style>
 </head>
@@ -148,7 +180,6 @@ footer {
     <p>Soft energy • Feminine power • Gentle transformation</p>
 </header>
 
-<!-- SEARCH + CATEGORIES -->
 <div class="controls">
     <input type="text" id="searchInput" placeholder="Search subliminals...">
 
@@ -161,11 +192,9 @@ footer {
     </div>
 </div>
 
-<!-- SUBLIMINAL LIST -->
 <section class="subliminals">
-    <div class="grid" id="subliminalGrid">
+    <div class="grid">
 
-        <!-- LOVE -->
         <div class="card" data-category="love">
             <h3>yoursubliminalname</h3>
             <ul>
@@ -174,44 +203,12 @@ footer {
                 <li>Benefit three</li>
             </ul>
             <div class="price">Price</div>
-            <a href="https://t.me/YourTelegramUsername" class="buy-btn">Buy on Telegram</a>
+            <a href="https://t.me/YourTelegramUsername" class="buy-btn">
+                Buy on Telegram
+            </a>
         </div>
 
-        <!-- MONEY -->
-        <div class="card" data-category="money">
-            <h3>yoursubliminalname</h3>
-            <ul>
-                <li>Benefit one</li>
-                <li>Benefit two</li>
-                <li>Benefit three</li>
-            </ul>
-            <div class="price">Price</div>
-            <a href="https://t.me/YourTelegramUsername" class="buy-btn">Buy on Telegram</a>
-        </div>
-
-        <!-- PREMIUM -->
-        <div class="card" data-category="premium">
-            <h3>yoursubliminalname</h3>
-            <ul>
-                <li>Premium benefit</li>
-                <li>Luxury energy</li>
-                <li>Fast results</li>
-            </ul>
-            <div class="price">Price</div>
-            <a href="https://t.me/YourTelegramUsername" class="buy-btn">Buy on Telegram</a>
-        </div>
-
-        <!-- CHARMS -->
-        <div class="card" data-category="charms">
-            <h3>yoursubliminalname</h3>
-            <ul>
-                <li>Magnetic aura</li>
-                <li>Soft attraction</li>
-                <li>Angel charm</li>
-            </ul>
-            <div class="price">Price</div>
-            <a href="https://t.me/YourTelegramUsername" class="buy-btn">Buy on Telegram</a>
-        </div>
+        <!-- COPY MORE CARDS -->
 
     </div>
 </section>
@@ -225,7 +222,7 @@ const searchInput = document.getElementById("searchInput");
 const cards = document.querySelectorAll(".card");
 const buttons = document.querySelectorAll(".categories button");
 
-searchInput.addEventListener("keyup", () => {
+searchInput.addEventListener("input", () => {
     const value = searchInput.value.toLowerCase();
     cards.forEach(card => {
         card.style.display = card.textContent.toLowerCase().includes(value)
