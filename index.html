@@ -58,7 +58,8 @@ header p {
     display: flex;
     gap: 10px;
     overflow-x: auto;
-    justify-content: center;
+    justify-content: flex-start; /* ✅ FIX */
+    -webkit-overflow-scrolling: touch;
 }
 
 .categories button {
@@ -162,19 +163,19 @@ footer {
     <input type="text" id="searchInput" placeholder="Search subliminals...">
 
     <div class="categories">
-        <button onclick="filterCategory('home')" class="active">Home</button>
-        <button onclick="filterCategory('love')">Love</button>
-        <button onclick="filterCategory('money')">Money</button>
-        <button onclick="filterCategory('premium')">Love Cake Premium</button>
-        <button onclick="filterCategory('charms')">Charms</button>
-        <button onclick="filterCategory('custom')">Customized Items</button>
+        <button class="active" onclick="filterCategory('home', this)">Home</button>
+        <button onclick="filterCategory('love', this)">Love</button>
+        <button onclick="filterCategory('money', this)">Money</button>
+        <button onclick="filterCategory('premium', this)">Love Cake Premium</button>
+        <button onclick="filterCategory('charms', this)">Charms</button>
+        <button onclick="filterCategory('custom', this)">Customized Items</button>
     </div>
 </div>
 
 <section class="subliminals">
 <div class="grid">
 
-<!-- HOME (ONLY THIS CARD) -->
+<!-- HOME -->
 <div class="card home-card" data-category="home">
     <h3>Free Subliminals</h3>
     <p class="subtext">Click below to access free subliminals</p>
@@ -183,7 +184,7 @@ footer {
     </a>
 </div>
 
-<!-- LOVE (2) -->
+<!-- LOVE -->
 <div class="card" data-category="love">
     <h3>yoursubliminalname</h3>
     <ul>
@@ -204,7 +205,7 @@ footer {
     <a href="https://t.me/YourTelegramUsername" class="buy-btn">Buy on Telegram</a>
 </div>
 
-<!-- MONEY (2) -->
+<!-- MONEY -->
 <div class="card" data-category="money">
     <h3>yoursubliminalname</h3>
     <ul>
@@ -237,7 +238,7 @@ footer {
     <a href="https://t.me/YourTelegramUsername" class="buy-btn">Buy on Telegram</a>
 </div>
 
-<!-- CHARMS (7 – duplicate this card) -->
+<!-- CHARMS -->
 <div class="card" data-category="charms">
     <h3>yourcharmsname</h3>
     <ul>
@@ -247,16 +248,7 @@ footer {
     <a href="https://t.me/YourTelegramUsername" class="buy-btn">Buy on Telegram</a>
 </div>
 
-<!-- CUSTOMIZED ITEMS (2) -->
-<div class="card" data-category="custom">
-    <h3>customizeditemname</h3>
-    <ul>
-        <li>Personalized for you</li>
-    </ul>
-    <div class="price">Price</div>
-    <a href="https://t.me/YourTelegramUsername" class="buy-btn">Order on Telegram</a>
-</div>
-
+<!-- CUSTOM -->
 <div class="card" data-category="custom">
     <h3>customizeditemname</h3>
     <ul>
@@ -293,9 +285,9 @@ searchInput.addEventListener("input", () => {
 });
 
 /* CATEGORY FILTER */
-function filterCategory(category) {
+function filterCategory(category, button) {
     buttons.forEach(btn => btn.classList.remove("active"));
-    event.target?.classList.add("active");
+    if (button) button.classList.add("active");
 
     cards.forEach(card => {
         if (category === "home") {
